@@ -42,6 +42,20 @@ app.post('/filmes', (req, res) => {
     O ID do filme é ${id}`)
 })
 
+app.put('filmes/:id', (req, res)=> {
+    const id = req.params.id -1;
+    const filme = req.body.filme;
+    filmes[id] = filme;
+    res.send(`Filme atualizado com sucesso: ${filme}.`)
+})
+
+app.delete('/filmes/:id', (req, res) => {
+    cost id = req.params.id -1;
+    delete filmes[id];
+    res.send("Filme excluido com sucesso");
+
+})
+
 app.listen(port, function(){
     console.info(`App rodando na porta http://localhost:${port}`)
 })
