@@ -3,10 +3,14 @@ const app = express();
 
 const port = 3000;
 
+app.use(express.json());
+
 const games = [
     'Skyrim',
     'Ragnarok',
-    'Civilization'
+    'Civilization',
+    'Hitman',
+    'The last of us',
 
 ];
 
@@ -44,6 +48,39 @@ app.get('/games/:id', (req, res) => {
         res.send(game);
     }
 });
+
+app.post('/games', (req, res) => {
+    const game = req.body.game;
+    const id = games.length;
+    games.push(game);
+
+    res.send(`O game foi adicionado com sucesso! ${game} foi cadastrado com o ID ${id}`)
+})
+
+app.put('/games/:id', (req, res)=> {
+    const id = req.params.id -1;
+    const game = req.body.game;
+    games[id] = game;
+    res.send(`${game} foi atualizado com sucesso!`)
+})
+
+app.delete('/games/:id', (req, res) => {
+    const id = req.params.id -1;
+    const game = game[id];
+    if(!game) {
+        res.send('Game não encontrado');
+    }
+    delete games[id];
+    res.send('Game escluido com sucesso');
+})
+
+app.delete('/filmesSlice/:id', (req, res) =>{
+    const id = req.params.id -1;
+    games.splice(id,1)
+    res.send('O game foi excluido com sucesso.')
+})
+
+
 
 app.listen(port, () => {
     console.info(`App esta rodando em: http://localhost:${port}/`);
