@@ -50,11 +50,22 @@ app.put('filmes/:id', (req, res)=> {
 })
 
 app.delete('/filmes/:id', (req, res) => {
-    cost id = req.params.id -1;
+    const id = req.params.id -1;
+    const filme = filme[id];
+    if(!filme) {
+        res.send('Filme não encontrado');
+    }
     delete filmes[id];
     res.send("Filme excluido com sucesso");
 
 })
+
+app.delete('/filmesSplice/:id', (req,res)=>{
+    const id = req.params.id-1;
+    filmes.splice(id,1)
+    res.send("Filme excluido com sucesso.")
+});
+
 
 app.listen(port, function(){
     console.info(`App rodando na porta http://localhost:${port}`)
