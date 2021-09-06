@@ -12,7 +12,7 @@ ReactDOM.render(
     <div class="admin">
     <Header/>
     <Nav/>
-    <App/>
+    <App/> {/*Esse componente corresponde a parte mutavel do meu Dashboard*/}
     <Footer/>
     </div>
   </React.StrictMode>,
